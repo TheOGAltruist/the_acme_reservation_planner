@@ -78,6 +78,12 @@ app.delete("/api/customers/:customer_id/reservations/:id", async(req, res, next)
     }
 })
 
+//Error handling
+app.use((err, req, res, next) => {
+    console.log(err);
+    res.status(err.status || 500).send({ error: err.message || err });
+});
+
 //Initialization function
 const init = async() => {
     //Connect to the client
